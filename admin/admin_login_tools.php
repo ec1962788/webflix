@@ -1,7 +1,7 @@
 <?php # LOGIN HELPER FUNCTIONS.
 
 # Function to load specified or default URL.
-function load($page = '../../users/user_login.php')
+function load($page = '../admin/admin_login.php')
 {
     # Begin URL with protocol, domain, and current directory.
     $url = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']);

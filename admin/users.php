@@ -54,6 +54,24 @@ if (isset($_GET['delete_user'])) {
     }
 }
 
+// Check if block_user query parameter is set
+if (isset($_GET['block_user'])) {
+    $block_user_id = $_GET['block_user'];
+
+    // Block the user in the database
+    $block_query = "UPDATE users SET user_blocked = 1 WHERE user_id = $block_user_id";
+    $block_result = mysqli_query($link, $block_query);
+
+    // Check if blocking was successful
+    if ($block_result) {
+        // Redirect back to the users page
+        header("Location: ../admin/users.php");
+        exit();
+    } else {
+        echo '<div class="alert alert-danger">Error: Unable to block user.</div>';
+    }
+}
+
 $query = "SELECT * FROM users";
 $result = mysqli_query($link, $query);
 ?>
@@ -153,13 +171,15 @@ $result = mysqli_query($link, $query);
                 <th>Email</th>
                 <th>Expiration Date</th>
                 <th>Is Admin?</th>
+				<th>Is Blocked?</th>
                 <th>Join Date</th>
                 <th>Name</th>
                 <th>Phone</th>
                 <th>Status</th>
                 <th>Surname</th>
                 <th>Type Paid</th>
-                <th>Actions</th>
+                <th>Delete</th>
+				<th>Block</th>
             </tr>
         </thead>
         <tbody class="text-white">
@@ -175,6 +195,7 @@ $result = mysqli_query($link, $query);
                     echo '<td class="text-white">' . $row['user_email'] . '</td>';
                     echo '<td class="text-white">' . $row['user_exp_date'] . '</td>';
                     echo '<td class="text-white">' . ($row['user_is_admin'] ? 'Yes' : 'No') . '</td>';
+					  echo '<td class="text-white">' . ($row['user_blocked'] ? 'Yes' : 'No') . '</td>';
                     echo '<td class="text-white">' . $row['user_join_date'] . '</td>';
                     echo '<td class="text-white">' . $row['user_name'] . '</td>';
                     echo '<td class="text-white">' . $row['user_phone'] . '</td>';
@@ -182,6 +203,11 @@ $result = mysqli_query($link, $query);
                     echo '<td class="text-white">' . $row['user_surname'] . '</td>';
                     echo '<td class="text-white">' . $row['user_type_paid'] . '</td>';
                     echo '<td class="text-white"><a href="../admin/users.php?delete_user=' . $row['user_id'] . '" class="btn btn-danger btn-sm">Delete</a></td>';
+					// Display block button
+            echo '<td>';
+            echo '<a href="../admin/users.php?block_user=' . $row['user_id'] . '" class="btn btn-danger btn-sm">Block</a>';
+            echo '</td>';
+         
                     echo '</tr>';
                 }
             } else {

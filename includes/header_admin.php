@@ -19,7 +19,7 @@
                     <a class="nav-link text-white" href="../admin/users.php"><strong>Users</strong></a>
                 </li>
                 <li class="nav-item px-3">
-                    <a class="nav-link btn btn-dark text-white px-3" href="../includes/logout.php">Sign Out</a>
+                    <a class="nav-link btn btn-dark text-white px-3" href="../admin/logout.php">Sign Out</a>
                 </li>
             </ul>
         </div>

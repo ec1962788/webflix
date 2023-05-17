@@ -42,7 +42,7 @@ $tv_result = mysqli_query($link, $tv_query);
 </head>
 <!--Main Body Starts -->
 <body>
-<?php include('../includes/header_free.php'); ?>
+<?php include('../includes/header_paid.php'); ?>
 
 <div class="container-fluid">
     <div class="row">
